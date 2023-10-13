@@ -1,9 +1,8 @@
-import 'package:flutter_assessment/model/multimedia.dart';
+import 'package:flutter_assessment/features/topStories/domain/entities/multimedia.dart';
 import 'package:json_annotation/json_annotation.dart';
-part 'top_stories.g.dart';
 
 @JsonSerializable()
-class TopStories {
+class ResultsEntity {
   String section;
   String subsection;
   String title;
@@ -23,7 +22,7 @@ class TopStories {
   List<Multimedia> multimedia;
   String shortUrl;
 
-  TopStories({
+  ResultsEntity({
     required this.section,
     required this.subsection,
     required this.title,
@@ -44,7 +43,7 @@ class TopStories {
     required this.shortUrl,
   });
 
-  factory TopStories.fromJson(Map<String, dynamic> json) => TopStories(
+  factory ResultsEntity.fromJson(Map<String, dynamic> json) => ResultsEntity(
     section: json["section"],
     subsection: json["subsection"],
     title: json["title"],
