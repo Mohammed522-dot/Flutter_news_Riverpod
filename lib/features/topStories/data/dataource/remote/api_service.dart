@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter_assessment/core/constant/constant.dart';
 import 'package:flutter_assessment/features/topStories/data/models/results.dart';
 import 'package:retrofit/retrofit.dart';
@@ -10,8 +8,7 @@ part 'api_service.g.dart';
  abstract class ApiService {
 
   factory ApiService(Dio dio) = _ApiService;
-  @GET('arts.json')
+  @GET("arts.json")
   Future<HttpResponse<List<ResultsModel>>> getAllNews({
-   @Query("apikey") String apikey,
-});
+   @Query("api-key") String apikey});
 }

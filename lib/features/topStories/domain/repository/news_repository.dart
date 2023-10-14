@@ -1,4 +1,6 @@
-import 'package:dartz/dartz.dart';
+
+import 'dart:async';
+
 import 'package:flutter_assessment/core/resources/data_state.dart';
 import 'package:flutter_assessment/features/topStories/data/models/results.dart';
 import 'package:flutter_assessment/features/topStories/data/repository/news_repository_impl.dart';
@@ -7,7 +9,7 @@ import 'package:flutter_assessment/features/topStories/presentation/providers/ne
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class NewsRepository {
-  Future<DataState<List<ResultsEntity>>> getAllNews();
-  Future<DataState<List<ResultsEntity>>> sectionNews(
+  Future<DataState,List<ResultsEntity>> getAllNews();
+  Future<DataState,ResultsEntity>> sectionNews(
       {required String query});
 }

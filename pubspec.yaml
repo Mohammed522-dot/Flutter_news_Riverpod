@@ -33,8 +33,9 @@ dependencies:
   retrofit: ^4.0.2
   retrofit_generator: ^6.0.0
   json_serializable: ^6.6.0
+  equatable: ^2.0.5
   dartz: ^0.10.1
-  connectivity_plus: ^4.0.1
+#  connectivity_plus: ^4.0.1
   build_runner: ^2.3.3
   flutter_riverpod: ^1.0.3+1
   freezed_annotation: ^2.1.0
