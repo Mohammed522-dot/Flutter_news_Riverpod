@@ -14,7 +14,7 @@ class NewsRepositoryImpl implements NewsRepository{
   final ApiService _apiService;
   NewsRepositoryImpl(this._apiService);
   @override
-  Future<DataState,List<ResultsModel>> getAllNews() async {
+  Future<DataState<List<ResultsModel>>> getAllNews() async {
     // try {
     final httpResponse = await _apiService.getAllNews(apikey: apiNewsKey);
     // if (httpResponse.response.statusCode == HttpStatus.ok) {
@@ -37,7 +37,7 @@ class NewsRepositoryImpl implements NewsRepository{
 
 
   @override
-  Future<DataState,ResultsEntity>> sectionNews({required String query}) {
+  Future<DataState<List<ResultsEntity>>> sectionNews({required String query}) {
     // TODO: implement sectionNews
     throw UnimplementedError();
   }

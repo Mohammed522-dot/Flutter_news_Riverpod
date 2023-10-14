@@ -33,8 +33,8 @@ class NewsNotifier extends StateNotifier<NewsState> {
   }
 
   void updateStateFromResponse(
-      Either<DataFailed,List<ResultsEntity>>  response) {
-      response.fold((failure) {
+      DataFailed<List<ResultsEntity>>  response) {
+      response.error!.response!.data.fold((failure) {
       state = state.copyWith(
         state : NewsConcreteState.failure,
         message: failure.error?.message,
