@@ -22,7 +22,7 @@ class NewsNotifier extends StateNotifier<NewsState> {
       );
 
       final response = await newsRepository.getAllNews();
-      updateStateFromResponse(response);
+      // updateStateFromResponse(response);
     } else {
       state = state.copyWith(
         state: NewsConcreteState.fetchedAllNews,
