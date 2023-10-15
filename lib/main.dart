@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_assessment/features/TopStories/presentation/screens/home_screen.dart';
+import 'package:flutter_assessment/features/topStories/presentation/screens/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {

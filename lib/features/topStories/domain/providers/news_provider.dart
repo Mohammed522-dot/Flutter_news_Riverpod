@@ -13,6 +13,5 @@ Provider.family<ApiService, ApiService>(
   final ApiService networkService = ref.watch(networkServiceProvider);
   final datasource = ref.watch(newsDatasourceProvider(networkService));
   final repository = NewsRepositoryImpl(datasource);
-
   return repository;
 });

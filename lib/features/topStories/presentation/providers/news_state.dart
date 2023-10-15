@@ -13,7 +13,7 @@ enum NewsConcreteState {
 }
 
 class NewsState extends Equatable {
-  final List<ResultsEntity> newsList;
+  final List<ResultsModel> newsList;
   final bool hasData;
   final NewsConcreteState state;
   final String message;

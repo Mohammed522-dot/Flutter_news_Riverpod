@@ -9,7 +9,7 @@ import 'package:flutter_assessment/features/topStories/presentation/providers/ne
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class NewsRepository {
-  Future<DataState<List<ResultsEntity>>> getAllNews();
+  Future<DataState<List<ResultsModel>>> getAllNews();
   Future<DataState<List<ResultsEntity>>> sectionNews(
       {required String query});
 }
