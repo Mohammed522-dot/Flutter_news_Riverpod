@@ -12,6 +12,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context,WidgetRef ref) {
     final news = ref.watch(newsNotifierProvider.notifier);
     // news = ref.watch(newsProvider).newsModel;
+    print(news.state);
     bool isLoading = ref.watch(newsNotifierProvider).isLoading;
 
     return Scaffold(
@@ -31,7 +32,6 @@ class HomeScreen extends ConsumerWidget {
       body: SafeArea(
            child: Column(
               children: [
-
                 isLoading ?
                 SizedBox(
                   height: MediaQuery.of(context).size.height /2,
@@ -44,6 +44,7 @@ class HomeScreen extends ConsumerWidget {
                     itemCount: news.state.newsList.length,
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
+                      print(news.state.newsList[index].title);
                       return NewsCard(resultsEntity: news.state.newsList[index],);
                     },
                   ),

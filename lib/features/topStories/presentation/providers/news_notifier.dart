@@ -23,7 +23,6 @@ class NewsNotifier extends StateNotifier<NewsState> {
 
       final response = await newsRepository.getAllNews();
       updateStateFromResponse(response);
-      // print(response.data);
     } else {
       state = state.copyWith(
         state: NewsConcreteState.fetchedAllNews,
@@ -34,15 +33,18 @@ class NewsNotifier extends StateNotifier<NewsState> {
   }
 
   void updateStateFromResponse(
-      DataState<List<ResultsModel>>  response) {
+      DataState<List<ResultsModel>> response) {
       response.error?.response?.data.fold((failure) {
       state = state.copyWith(
         state : NewsConcreteState.failure,
         message: failure.error?.message,
+        newsList: response.data,
         isLoading: false,
       );
     }, (data) {
-      final newsList = data.map((e) => ResultsModel.fromJson(e as Map<String, dynamic>)).toList();
+      List<ResultsModel> newsList = response.data!.map<ResultsModel>((e) => ResultsModel.fromJson(e as Map<String, dynamic>)).toList();
+
+        print(response);
         state = state.copyWith(
         newsList: newsList,
         state: NewsConcreteState.loaded,

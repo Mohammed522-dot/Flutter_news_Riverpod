@@ -26,8 +26,8 @@ class NewsRepositoryImpl implements NewsRepository{
         // List<Map<String, dynamic>> list = List<Map<String, dynamic>>.from(httpResponse.data);
             // return httpResponse.response.data.map<ResultsModel>((element) => Map<String, dynamic>.from(element)).toList();
         //
-        print(httpResponse.response.data);
         return DataSuccess(httpResponse.data);
+
       }
       else {
         return DataFailed(DioException(

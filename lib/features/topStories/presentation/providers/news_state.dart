@@ -19,7 +19,7 @@ class NewsState extends Equatable {
   final String message;
   final bool isLoading;
   const NewsState({
-    this.newsList = const [],
+     this.newsList= const [],
     this.isLoading = false,
     this.hasData = false,
     this.state = NewsConcreteState.initial,
@@ -48,7 +48,10 @@ class NewsState extends Equatable {
       message: message ?? this.message,
     );
   }
-
+  @override
+  String toString() {
+    return 'NewsState(isLoading:$isLoading, newsLength: ${newsList.length}, hasData: $hasData, state: $state, message: $message)';
+  }
   @override
   // TODO: implement props
   List<Object?> get props => [newsList, hasData, state, message];
