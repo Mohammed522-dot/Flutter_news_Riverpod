@@ -3,16 +3,14 @@
 
 README.md
 
-Coverage HitCount
 Flutter Clean Architecture with Riverpod
 
-A Flutter app that uses the "Dummy Json" api.
+A Flutter app that uses the "nytimes TopStories Json" api.
 Features
 
-    Login
-    Fetch products
-    Search products
-    Pagination
+    Fetch news
+    Search for news
+    filter by section
 
 What is used in this project?
 
