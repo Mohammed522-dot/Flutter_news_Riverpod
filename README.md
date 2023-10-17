@@ -66,18 +66,5 @@ The shared folder contains code shared across features
 
     theme contains general styles (colors, themes & text styles)
     model contains all the Data models needed in the application.
-    http is implemented with Dio.
-    storage is implemented with SharedPreferenc
-
-        es.
-        Service locator pattern and Riverpod are used to abstract services when used in other layers.
-
-For example:
-
-final storageServiceProvider = Provider((ref) {
-  return SharedPrefsService();
-});
-
-// Usage:
-// ref.watch(storageServiceProvider);
+    http is implemented with D
 
