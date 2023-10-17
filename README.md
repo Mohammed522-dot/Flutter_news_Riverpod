@@ -20,15 +20,13 @@ What is used in this project?
 
     Freezed Code generation
 
-    Dartz Functional Programming Either<Left,Right>
-
     Auto Route Navigation package that uses code generation to simplify route setup
 
-    Dio Http client for dart. Supports interceptors and global configurations
+    Retrofit for network Request
 
     Shared Preferences Persistent storage for simple data
 
-    Flutter and Dart And obviously flutter and dart 😅
+    Flutter and Dart And obviously flutter and dart
 
 Project Description
 Data
@@ -60,10 +58,4 @@ b. Providers
 Describes the logic processing required for the presentation. Communicates directly with the Providers from the domain layer.
 Project Description
 main.dart file has services initialization code and wraps the root MyApp with a ProviderScope
-main/app.dart has the root MaterialApp and initializes AppRouter to handle the route throughout the application.
-services abstract app-level services with their implementations.
-The shared folder contains code shared across features
 
-    theme contains general styles (colors, themes & text styles)
-    model contains all the Data models needed in the application.
-    http is implemented with D
