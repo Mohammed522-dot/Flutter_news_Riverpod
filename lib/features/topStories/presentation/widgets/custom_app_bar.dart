@@ -17,26 +17,38 @@ class CustomAppBar extends ConsumerStatefulWidget {
 class _CustomAppBarState extends ConsumerState<CustomAppBar> {
   final myProvider = StateProvider((ref) => newsNotifierProvider.notifier);
 
-    List<ResultsModel> items =[];
+  final List<ResultsModel> _allnews = [];
+  List<ResultsModel> _foundNews = [];
 
   @override
   void initState() {
 
+    _foundNews = _allnews;
+    print(_allnews);
     super.initState();
   }
-  void filterSearchResults(String query) {
-    setState(() {
-      final news = ref.watch(newsNotifierProvider.notifier);
-       items  = news.state.newsList;
-      items
-          .where((item) =>
-          item.title.toLowerCase().contains(query.toLowerCase()))
+
+  void _runFilter(String enteredKeyword) {
+    final _allnews = ref.watch(newsNotifierProvider.notifier);
+    List<ResultsModel> results = _allnews.state.newsList;
+    if (enteredKeyword.isEmpty) {
+      // if the search field is empty or only contains white-space, we'll display all users
+      results = _allnews.state.newsList;
+    } else {
+      results = _allnews.state.newsList
+          .where((news) =>
+          news.title.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
+      // we use the toLowerCase() method to make it case-insensitive
+    }
+    // Refresh the UI
+    setState(() {
+      _foundNews = results;
+      print(_foundNews);
     });
   }
   @override
   Widget build(BuildContext context) {
-
     Debouncer _debouncer = Debouncer();
     return Container(
       margin: const EdgeInsets.only(top: 20, left: 30, right: 30),
@@ -50,18 +62,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
           ]
       ),
       child: TextField(
-        onChanged: (value) {
-          _debouncer.run(() {
-            // if (value.isNotEmpty) {
-              filterSearchResults(value);
-            // } else {
-            //   ref
-            //       .read(newsNotifierProvider.notifier)
-            //       .state
-            //       .newsList;
-            // }
-          });
-        },
+        onChanged: (value) => _runFilter(value),
         decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white,

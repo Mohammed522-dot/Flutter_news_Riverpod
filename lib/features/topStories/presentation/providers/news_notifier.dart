@@ -51,7 +51,7 @@ class NewsNotifier extends StateNotifier<NewsState> {
   }
   void updateStateFromResponse(
       DataState<List<ResultsModel>>  response) {
-      if(response.data == response.error) {
+      if(response.error != null) {
       state = state.copyWith(
         state : NewsConcreteState.failure,
         message: response.error?.message,
