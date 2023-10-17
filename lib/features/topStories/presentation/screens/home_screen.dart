@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_assessment/features/topStories/data/models/results.dart';
 import 'package:flutter_assessment/features/topStories/presentation/providers/news_state.dart';
 import 'package:flutter_assessment/features/topStories/presentation/providers/news_state_provider.dart';
+import 'package:flutter_assessment/features/topStories/presentation/screens/news_details.dart';
 import 'package:flutter_assessment/features/topStories/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter_assessment/features/topStories/presentation/widgets/news_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -137,15 +138,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   itemCount: data.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return NewsCard(
-                      resultsEntity: news.state.newsList[index],
+                    return InkWell(
+                       onTap: (){
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailsView(resultsEntity: news.state.newsList[index])));
+                       },
+                      child: NewsCard(
+                        resultsEntity: news.state.newsList[index],
+                      ),
                     );
                   },
                 ) :GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2),
                     itemBuilder: (_, index) {
-                      return NewsCardGrid(resultsEntity: news.state.newsList[index]);
+                      return InkWell( onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailsView(resultsEntity: news.state.newsList[index])));
+                      },
+                          child: NewsCardGrid(resultsEntity: news.state.newsList[index]));
                     }),
               ),
         _foundNews.isNotEmpty
@@ -154,8 +163,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   itemCount: _foundNews.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return NewsCard(
-                      resultsEntity: _foundNews[index],
+                    return InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailsView(resultsEntity: news.state.newsList[index])));
+                      },
+                      child: NewsCard(
+                        resultsEntity: _foundNews[index],
+                      ),
                     );
                   },
                 ) : GridView.builder(
