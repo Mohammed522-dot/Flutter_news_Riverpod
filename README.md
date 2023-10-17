@@ -67,4 +67,3 @@ The shared folder contains code shared across features
     theme contains general styles (colors, themes & text styles)
     model contains all the Data models needed in the application.
     http is implemented with D
-
