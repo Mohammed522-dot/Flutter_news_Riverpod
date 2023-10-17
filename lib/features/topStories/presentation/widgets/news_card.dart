@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_assessment/config/app_configs.dart';
+import 'package:flutter_assessment/features/topStories/domain/entities/multimedia.dart';
 import 'package:flutter_assessment/features/topStories/domain/entities/results.dart';
 
 class NewsCard extends StatelessWidget {
    final ResultsEntity resultsEntity;
-
-  const NewsCard({ Key? key, required this.resultsEntity }) : super(key: key);
+  const NewsCard({ Key? key, required this.resultsEntity, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +23,7 @@ class NewsCard extends StatelessWidget {
           ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: CachedNetworkImage(
-                imageUrl: 'article.urlToImage' == null ?
-                AppConfigs.imageNotFound : 'article.urlToImage.toString()',
+                imageUrl:  resultsEntity.multimedia[0].url ?? AppConfigs.imageNotFound,
                 errorWidget: (context, string, _) {
                   return const Icon(Icons.error);
                 },
@@ -35,16 +34,32 @@ class NewsCard extends StatelessWidget {
           ),
           const SizedBox(
             width: 10,
+            height: 10,
           ),
+
           Expanded(
             flex: 1,
-            child: Text(
-              'article.title.toString()',
+            child:Column(
+            children: [
+              Text(
+              resultsEntity.title,
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold
+              )),
+              const SizedBox(
+                height: 10,
               ),
-            ),
+            Text(
+          resultsEntity.byline,
+          style: const TextStyle(
+              color: Colors.green,
+              fontSize: 16,
+              fontWeight: FontWeight.bold
+          )
+      )
+    ],
+    )
           )
         ],
       ),

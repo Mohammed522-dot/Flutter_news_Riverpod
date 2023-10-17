@@ -8,9 +8,10 @@ import 'package:flutter_assessment/features/topStories/domain/repository/news_re
 class GetNewsUseCase  implements UseCase<DataState<List<ResultsModel>>,void> {
 
   final NewsRepository _newsRepository;
-  GetNewsUseCase(this._newsRepository);
+  final String section;
+  GetNewsUseCase(this._newsRepository,this.section);
   @override
   Future<DataState<List<ResultsModel>>> call({void params}) {
-  return _newsRepository.getAllNews();
+  return _newsRepository.getAllNews(section:section);
   }
 }

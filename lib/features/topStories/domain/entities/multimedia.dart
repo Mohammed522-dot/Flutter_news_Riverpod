@@ -28,4 +28,8 @@ class Multimedia {
     "caption": caption,
     "copyright": copyright,
   };
+  @override
+  String toString() {
+    return 'url:$url, height: $height, width: $width, caption: $caption, copyright: $copyright)';
+  }
 }

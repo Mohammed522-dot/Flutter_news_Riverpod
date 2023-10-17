@@ -2,13 +2,41 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_assessment/features/topStories/data/models/results.dart';
+import 'package:flutter_assessment/features/topStories/domain/entities/results.dart';
+import 'package:flutter_assessment/features/topStories/presentation/providers/news_state_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomAppBar extends ConsumerWidget {
-  const CustomAppBar({ Key? key }) : super(key: key);
+class CustomAppBar extends ConsumerStatefulWidget {
+
+  const CustomAppBar({ Key? key,}) : super(key: key);
+  @override
+  ConsumerState<CustomAppBar> createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends ConsumerState<CustomAppBar> {
+  final myProvider = StateProvider((ref) => newsNotifierProvider.notifier);
+
+    List<ResultsModel> items =[];
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  void initState() {
+
+    super.initState();
+  }
+  void filterSearchResults(String query) {
+    setState(() {
+      final news = ref.watch(newsNotifierProvider.notifier);
+       items  = news.state.newsList;
+      items
+          .where((item) =>
+          item.title.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+
     Debouncer _debouncer = Debouncer();
     return Container(
       margin: const EdgeInsets.only(top: 20, left: 30, right: 30),
@@ -24,11 +52,14 @@ class CustomAppBar extends ConsumerWidget {
       child: TextField(
         onChanged: (value) {
           _debouncer.run(() {
-            if (value.isNotEmpty) {
-              // ref.read(newsProvider.notifier).loadSearchedNews(value);
-            } else {
-              // ref.read(newsProvider.notifier).loadNews();
-            }
+            // if (value.isNotEmpty) {
+              filterSearchResults(value);
+            // } else {
+            //   ref
+            //       .read(newsNotifierProvider.notifier)
+            //       .state
+            //       .newsList;
+            // }
           });
         },
         decoration: InputDecoration(
@@ -48,10 +79,10 @@ class CustomAppBar extends ConsumerWidget {
         ),
       ),
     );
-
-    
   }
+
 }
+
 
 class Debouncer {
   final int milliseconds;

@@ -7,6 +7,7 @@ import 'package:flutter_assessment/features/topStories/domain/entities/results.d
 import 'package:flutter_assessment/features/topStories/domain/repository/news_repository.dart';
 import 'package:flutter_assessment/features/topStories/presentation/providers/news_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:retrofit/dio.dart';
 
 class NewsNotifier extends StateNotifier<NewsState> {
   final NewsRepository newsRepository;
@@ -21,7 +22,7 @@ class NewsNotifier extends StateNotifier<NewsState> {
         isLoading: true,
       );
 
-      final response = await newsRepository.getAllNews();
+      final response = await newsRepository.sectionNews();
       updateStateFromResponse(response);
     } else {
       state = state.copyWith(
@@ -31,28 +32,40 @@ class NewsNotifier extends StateNotifier<NewsState> {
       );
     }
   }
+  Future<void> fetchNewsSection(String section) async {
+    if (state.state != NewsConcreteState.fetchedAllNews) {
+      state = state.copyWith(
+        state: NewsConcreteState.loading,
+        isLoading: true,
+      );
 
+      final response = await newsRepository.getAllNews(section: section);
+      updateStateFromResponse(response);
+    } else {
+      state = state.copyWith(
+        state: NewsConcreteState.fetchedAllNews,
+        message: 'No more products available',
+        isLoading: false,
+      );
+    }
+  }
   void updateStateFromResponse(
-      DataState<List<ResultsModel>> response) {
-      response.error?.response?.data.fold((failure) {
+      DataState<List<ResultsModel>>  response) {
+      if(response.data == response.error) {
       state = state.copyWith(
         state : NewsConcreteState.failure,
-        message: failure.error?.message,
-        newsList: response.data,
+        message: response.error?.message,
         isLoading: false,
       );
-    }, (data) {
-      List<ResultsModel> newsList = response.data!.map<ResultsModel>((e) => ResultsModel.fromJson(e as Map<String, dynamic>)).toList();
-
-        print(response);
+    }else {
         state = state.copyWith(
-        newsList: newsList,
+        newsList: response.data,
         state: NewsConcreteState.loaded,
         hasData: true,
-        message: newsList.isEmpty ? 'No products found' : '',
+        message: state.newsList.isEmpty ? 'No products found' : '',
         isLoading: false,
       );
-    });
+      }
   }
 
   void resetState() {

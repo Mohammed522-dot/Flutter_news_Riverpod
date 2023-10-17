@@ -2,7 +2,6 @@ import 'package:flutter_assessment/features/topStories/domain/entities/multimedi
 import 'package:flutter_assessment/features/topStories/domain/entities/results.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-@JsonSerializable()
 class ResultsModel extends ResultsEntity {
    ResultsModel({
   required super.section,
@@ -16,11 +15,11 @@ class ResultsModel extends ResultsEntity {
     required super.createdDate,
      required super.publishedDate,
      required super.materialTypeFacet,
-     required super.kicker,
-     required super.desFacet,
-     required super.orgFacet,
-     required super.perFacet,
-     required super.geoFacet,
+     // required super.kicker,
+     // required super.desFacet,
+     // required super.orgFacet,
+     // required super.perFacet,
+     // required super.geoFacet,
      required super.multimedia,
      required super.shortUrl});
 
@@ -38,11 +37,11 @@ class ResultsModel extends ResultsEntity {
       createdDate: DateTime.parse(json["created_date"]),
       publishedDate: DateTime.parse(json["published_date"]),
       materialTypeFacet: json["material_type_facet"],
-      kicker: json["kicker"],
-      desFacet: List<String>.from(json["des_facet"].map((x) => x)),
-      orgFacet: List<String>.from(json["org_facet"].map((x) => x)),
-      perFacet: List<String>.from(json["per_facet"].map((x) => x)),
-      geoFacet: List<String>.from(json["geo_facet"].map((x) => x)),
+      // kicker: json["kicker"],
+      // desFacet: List<String>.from(json["des_facet"].map((x) => x)),
+      // orgFacet: List<String>.from(json["org_facet"].map((x) => x)),
+      // perFacet: List<String>.from(json["per_facet"].map((x) => x)),
+      // geoFacet: List<String>.from(json["geo_facet"].map((x) => x)),
       multimedia: List<Multimedia>.from(
           json["multimedia"].map((x) => Multimedia.fromJson(x))),
       shortUrl: json["short_url"],
@@ -60,12 +59,18 @@ class ResultsModel extends ResultsEntity {
     "created_date": createdDate.toIso8601String(),
     "published_date": publishedDate.toIso8601String(),
     "material_type_facet": materialTypeFacet,
-    "kicker": kicker,
-    "des_facet": List<dynamic>.from(desFacet.map((x) => x)),
-    "org_facet": List<dynamic>.from(orgFacet.map((x) => x)),
-    "per_facet": List<dynamic>.from(perFacet.map((x) => x)),
-    "geo_facet": List<dynamic>.from(geoFacet.map((x) => x)),
-    "multimedia": List<dynamic>.from(multimedia.map((x) => x.toJson())),
+    // "kicker": kicker,
+    // "des_facet": List<dynamic>.from(desFacet.map((x) => x)),
+    // "org_facet": List<dynamic>.from(orgFacet.map((x) => x)),
+    // "per_facet": List<dynamic>.from(perFacet.map((x) => x)),
+    // "geo_facet": List<dynamic>.from(geoFacet.map((x) => x)),
+    // "multimedia": List<dynamic>.from(multimedia.map((x) => x.toJson())),
     "short_url": shortUrl,
   };
+
+   @override
+   String toString() {
+     return 'ResultsModel { section: $section, subsection: $subsection,title: $title, abstract: $resultAbstract }';
+   }
+
 }

@@ -9,6 +9,7 @@ enum NewsConcreteState {
   loading,
   loaded,
   failure,
+  section,
   fetchedAllNews
 }
 
@@ -17,10 +18,12 @@ class NewsState extends Equatable {
   final bool hasData;
   final NewsConcreteState state;
   final String message;
+  final String section;
   final bool isLoading;
   const NewsState({
      this.newsList= const [],
     this.isLoading = false,
+     required this.section,
     this.hasData = false,
     this.state = NewsConcreteState.initial,
     this.message = '',
@@ -28,6 +31,7 @@ class NewsState extends Equatable {
   const NewsState.initial({
     this.newsList = const [],
     this.isLoading = false,
+     this.section = '',
     this.hasData = false,
     this.state = NewsConcreteState.initial,
     this.message = '',
@@ -46,6 +50,7 @@ class NewsState extends Equatable {
       hasData: hasData ?? this.hasData,
       state: state ?? this.state,
       message: message ?? this.message,
+      section: section ?? this.section ,
     );
   }
   @override
